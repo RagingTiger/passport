@@ -15,8 +15,9 @@ classifiers = [
 Changelog = "https://github.com/RagingTiger/passport/releases"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = ">=3.9,<3.13"
 click = ">=8.0.1"
+pandas = ">=2.1.1"
 
 [tool.poetry.group.dev]
 optional = true
