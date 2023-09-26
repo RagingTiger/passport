@@ -1,5 +1,6 @@
 .PHONY: all jupyter pause address containers list-containers stop-containers \
-        restart-containers tests pytest isort black flake8 mypy shell clear-nb clean
+        restart-containers lint tests pytest isort black flake8 mypy shell clear-nb \
+        clean
 
 # Usage:
 # make                    # just alias to containers command
@@ -10,6 +11,7 @@
 # make list-containers    # list all running containers
 # make stop-containers    # simply stops all running Docker containers
 # make restart-containers # restart all containers
+# make lint               # run linters
 # make tests              # run full testing suite
 # make pytest             # run pytest in docker container
 # make isort              # run isort in docker container
@@ -39,7 +41,7 @@ JPTCTNR = jupyter.${DCTNR}
 SRCPATH = /usr/local/src/passport
 DCKRIMG = ghcr.io/ragingtiger/passport:master
 JPTRSRV = docker run --rm -v ${CURRENTDIR}:/home/jovyan -it ${DCKRIMG}
-DCKRTST = docker run --rm -v ${CURRENTDIR}:${SRCPATH} -it ${DCKRIMG}
+DCKRTST = docker run --rm -v ${CURRENTDIR}:${SRCPATH} ${DCKROPT} -it ${DCKRIMG}
 
 # jupyter nbconvert vars
 NBCLER = jupyter nbconvert --clear-output --inplace
@@ -123,8 +125,11 @@ stop-containers:
 # restart all containers
 restart-containers: stop-containers containers
 
+# run linters
+lint: isort black flake8 mypy
+
 # run full testing suite
-tests: pytest isort black flake8 mypy
+tests: pytest lint
 
 # run pytest in docker container
 pytest:
