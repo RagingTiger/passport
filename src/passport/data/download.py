@@ -8,7 +8,9 @@ from urllib.request import urlretrieve
 
 GITHUB_URL = "https://github.com"
 RELEASES_URL = urljoin(GITHUB_URL, "RagingTiger/passport/releases/download/")
-DATASET_URLS = {}
+DATASET_URLS = {
+    "passportindex_2023": RELEASES_URL + "v0.0.1/passportindex_2023.tar.gz",
+}
 
 
 def _extract(in_path: Path, out_path: Path) -> Path:
