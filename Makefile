@@ -37,7 +37,7 @@ NOTEBOOKS  := $(shell find ${INTDR} -name "*.ipynb" -not -path "*/.ipynb_*/*")
 # docker-related variables
 JPTCTNR = jupyter.${DCTNR}
 SRCPATH = /usr/local/src/passport
-DCKRIMG = ghcr.io/RagingTiger/passport:master
+DCKRIMG = ghcr.io/ragingtiger/passport:master
 JPTRSRV = docker run --rm -v ${CURRENTDIR}:/home/jovyan -it ${DCKRIMG}
 DCKRTST = docker run --rm -v ${CURRENTDIR}:${SRCPATH} -it ${DCKRIMG}
 
